@@ -8,9 +8,16 @@ from selenium.webdriver.support import expected_conditions as EC
 class Baseclass:
 
     def wait_for_element(self, driver, locator):
-
         # wait 10 seconds before looking for element
         element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, locator))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, locator))
         )
 
+    def wait_for_element_xpath(self, driver, *locator):
+        # wait 10 seconds before looking for element
+        element = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(locator)
+        )
+
+    def select_by_link_text(self, driver, link_text):
+        driver.find_element_by_link_text(link_text).click()
